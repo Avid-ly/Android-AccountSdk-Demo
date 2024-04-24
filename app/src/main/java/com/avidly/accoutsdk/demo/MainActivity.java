@@ -15,7 +15,7 @@ import com.aas.sdk.account.AASdk;
 import com.aly.sdk.ALYAnalysis;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "AccountLoginSdk_";
+    private static final String TAG = "AASDK:";
     private View mLoginButton, mFbTokenBtn;
     private View mUserCenterButton;
     private TextView mGgidTextView;
@@ -34,13 +34,20 @@ public class MainActivity extends AppCompatActivity {
         mModeTextView = findViewById(R.id.tvMode);
         mFbTokenTextView = findViewById(R.id.tv_fb_token);
 
-        ALYAnalysis.init(this, "888888", "32401");
-        AASdk.initSdk(this, BuildConfig.productId);
-//        AASdk.initSdk(this, null);
+        ALYAnalysis.init(this,  BuildConfig.productId, "32401", new ALYAnalysis.TasdkinitializdListener() {
+            @Override
+            public void onSuccess(String s) {
+                Log.i(TAG, "tasdk init onSuccess: "+s);
+                setAAUGgidCallback();
+                setAAUTokenCallback();
+                AASdk.initSdk(MainActivity.this,  BuildConfig.productId);
+            }
 
-        setAAUTokenCallback();
-
-//        AASdk.accountLogin(this);
+            @Override
+            public void onFail(String s) {
+                Log.i(TAG, "aly init onFail: " + s);
+            }
+        });
         AASdk.setAASCloseUserCenterCallBack(new AASCloseUserCenterCallBack() {
             @Override
             public void onClosed() {
@@ -118,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //获得用户登陆后的GGID
                 String ggid = AASdk.getLoginedGGid();
-                Log.i("WAN", "mode is " + mode);
+                Log.i(TAG, "mode is " + mode);
 
             }
 
