@@ -64,7 +64,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:16.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.aly.sdk:tasdk:+'
-    implementation 'com.aas.sdk.account:aasdk:+'
+    implementation 'com.aas.sdk.account:aasdk:2.0.1.2'
     implementation 'com.google.android.gms:play-services-base:18.1.0'
     implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
     implementation "com.android.installreferrer:installreferrer:2.2"
